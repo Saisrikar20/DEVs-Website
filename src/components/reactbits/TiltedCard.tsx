@@ -70,3 +70,4 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
 };
 
 export default TiltedCard;
+

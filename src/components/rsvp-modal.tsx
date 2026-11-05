@@ -30,19 +30,19 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
       setTicketIssued(generatedPass);
       setLoading(false);
 
-      // Trigger celebratory confetti
+      // Trigger celebratory monochrome silver/white confetti
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 90,
+        spread: 75,
         origin: { y: 0.6 },
-        colors: ["#34d399", "#06b6d4", "#ffffff"],
+        colors: ["#ffffff", "#d4d4d8", "#a1a1aa"],
       });
     }, 600);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-      <div className="relative w-full max-w-lg rounded-2xl border border-white/15 bg-zinc-950 p-6 sm:p-8 shadow-2xl text-left">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+      <div className="relative w-full max-w-lg rounded-2xl border border-white/20 bg-zinc-950 p-6 sm:p-8 shadow-2xl text-left">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -53,7 +53,7 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
 
         {!ticketIssued ? (
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono font-medium mb-3">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-white/[0.08] text-white border border-white/20 text-xs font-mono font-medium mb-3">
               <Ticket className="w-3.5 h-3.5" />
               <span>RSVP PASS REGISTRATION</span>
             </div>
@@ -62,20 +62,20 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
               {event.title}
             </h3>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-300 mb-6 pb-4 border-b border-white/[0.08]">
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-400 mb-6 pb-4 border-b border-white/[0.08]">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+                <Calendar className="w-3.5 h-3.5 text-zinc-300" />
                 {event.date}
               </span>
               <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                <MapPin className="w-3.5 h-3.5 text-zinc-300" />
                 {event.venue}
               </span>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-1.5">
+                <label className="block text-xs font-mono text-zinc-400 mb-1.5">
                   Full Name
                 </label>
                 <input
@@ -84,14 +84,14 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
                   placeholder="e.g. Alex Kumar"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">
-                    College Email / Official Email
+                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
+                    College / Official Email
                   </label>
                   <input
                     type="email"
@@ -99,11 +99,11 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
                     placeholder="rollno@rajalakshmi.edu.in"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">
+                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
                     Roll Number
                   </label>
                   <input
@@ -112,19 +112,19 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
                     placeholder="211701xxx"
                     value={rollNo}
                     onChange={(e) => setRollNo(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-1.5">
+                <label className="block text-xs font-mono text-zinc-400 mb-1.5">
                   Engineering Department
                 </label>
                 <select
                   value={dept}
                   onChange={(e) => setDept(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white transition-colors"
                 >
                   <option value="CSE">Computer Science &amp; Engineering</option>
                   <option value="IT">Information Technology</option>
@@ -139,59 +139,59 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ event, onClose }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-2 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono font-bold text-sm transition-all shadow-[0_0_20px_rgba(52,211,153,0.3)] active:scale-95 disabled:opacity-50 cursor-pointer"
+                className="w-full mt-2 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-mono font-bold text-sm transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 disabled:opacity-50 cursor-pointer"
               >
                 {loading ? "Generating Digital Pass..." : "Confirm RSVP & Generate Pass"}
               </button>
             </form>
           </div>
         ) : (
-          /* Issued Digital Pass View */
+          /* Digital Pass View */
           <div className="text-center py-2">
-            <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+            <div className="w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center mx-auto mb-4 border border-white/20">
               <CheckCircle className="w-6 h-6" />
             </div>
 
             <h3 className="text-xl font-bold text-white mb-1">
               Registration Confirmed!
             </h3>
-            <p className="text-xs text-zinc-300 mb-6">
+            <p className="text-xs text-zinc-400 mb-6">
               Your attendee pass is ready. Please present this at the venue entrance.
             </p>
 
             {/* Digital Badge Card */}
-            <div className="p-5 rounded-2xl border border-dashed border-emerald-500/40 bg-zinc-900/90 text-left font-mono space-y-3 mb-6 relative overflow-hidden">
+            <div className="p-5 rounded-2xl border border-dashed border-white/30 bg-zinc-900 text-left font-mono space-y-3 mb-6 relative overflow-hidden">
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <span className="text-[11px] text-zinc-400 uppercase tracking-widest">
                   DEVS REC PASS
                 </span>
-                <span className="text-xs font-bold text-emerald-400">
+                <span className="text-xs font-bold text-white">
                   {ticketIssued}
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] text-zinc-300 block uppercase">
+                <span className="text-[10px] text-zinc-500 block uppercase">
                   Attendee
                 </span>
                 <span className="text-sm font-bold text-white block">
                   {name} ({dept})
                 </span>
-                <span className="text-xs text-zinc-300 block">
+                <span className="text-xs text-zinc-400 block">
                   {rollNo} · {email}
                 </span>
               </div>
 
               <div className="pt-2 border-t border-white/10 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-zinc-300 block uppercase">
+                  <span className="text-[10px] text-zinc-500 block uppercase">
                     Event
                   </span>
                   <span className="text-xs text-white font-medium">
                     {event.title}
                   </span>
                 </div>
-                <QrCode className="w-9 h-9 text-emerald-400" />
+                <QrCode className="w-9 h-9 text-white" />
               </div>
             </div>
 

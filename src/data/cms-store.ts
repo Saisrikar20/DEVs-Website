@@ -12,7 +12,7 @@ import {
   ClubStats,
 } from "./club-data";
 
-const CMS_STORAGE_KEY = "devs_rec_cms_data_v1";
+const CMS_STORAGE_KEY = "devs_rec_cms_data_v2";
 
 export interface CMSData {
   announcement: string;
@@ -85,3 +85,4 @@ export function useCMSData() {
 
   return { data, isLoaded, updateData, resetData };
 }
+

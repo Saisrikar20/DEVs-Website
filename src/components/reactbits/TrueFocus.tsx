@@ -16,8 +16,8 @@ interface TrueFocusProps {
 export const TrueFocus: React.FC<TrueFocusProps> = ({
   sentence = "DEVS REC Technical Community",
   blurAmount = 4,
-  borderColor = "#34d399",
-  glowColor = "rgba(52, 211, 153, 0.4)",
+  borderColor = "#ffffff",
+  glowColor = "rgba(255, 255, 255, 0.35)",
   className = "",
 }) => {
   const words = sentence.split(" ");
@@ -55,3 +55,4 @@ export const TrueFocus: React.FC<TrueFocusProps> = ({
 };
 
 export default TrueFocus;
+

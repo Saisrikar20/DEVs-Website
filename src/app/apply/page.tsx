@@ -17,7 +17,7 @@ export default function ApplyPage() {
     rollNumber: "",
     department: "CSE",
     yearOfStudy: "2nd Year",
-    primaryDomain: "Full Stack & Web",
+    primaryDomain: "AI Systems & LLMs",
     githubUrl: "",
     portfolioUrl: "",
     whyJoin: "",
@@ -34,10 +34,10 @@ export default function ApplyPage() {
       setSubmitted(true);
 
       confetti({
-        particleCount: 100,
+        particleCount: 90,
         spread: 80,
         origin: { y: 0.5 },
-        colors: ["#34d399", "#06b6d4", "#a855f7"],
+        colors: ["#ffffff", "#d4d4d8", "#71717a"],
       });
     }, 700);
   };
@@ -50,25 +50,25 @@ export default function ApplyPage() {
             {/* Header */}
             <div className="mb-10 text-center sm:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-zinc-300 mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
                 <span>ANNUAL RECRUITMENT CYCLE</span>
               </div>
               <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                <DecryptedText text="Join DEVS REC" speed={30} className="text-white" encryptedClassName="text-emerald-400 font-mono" />
+                <DecryptedText text="Join DEVS REC" speed={30} className="text-white" encryptedClassName="text-zinc-400 font-mono" />
               </h1>
-              <p className="mt-3 text-sm sm:text-base text-zinc-300 leading-relaxed">
+              <p className="mt-3 text-sm sm:text-base text-zinc-400 leading-relaxed">
                 Step into the arena. Fill out the application form below. We review every single application and evaluate candidates on passion, curiosity, and proof of work.
               </p>
             </div>
 
-            {/* Application Form */}
+            {/* Application Form (Monochrome) */}
             <form
               onSubmit={handleSubmit}
-              className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950/80 shadow-2xl space-y-6"
+              className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-zinc-950 shadow-2xl space-y-6"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     Full Name *
                   </label>
                   <input
@@ -79,12 +79,12 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, fullName: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     REC Official Email *
                   </label>
                   <input
@@ -95,14 +95,14 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     Roll Number *
                   </label>
                   <input
@@ -113,12 +113,12 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, rollNumber: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     Department
                   </label>
                   <select
@@ -126,7 +126,7 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, department: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white transition-colors"
                   >
                     <option value="CSE">Computer Science &amp; Engg</option>
                     <option value="IT">Information Tech</option>
@@ -138,7 +138,7 @@ export default function ApplyPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     Year of Study
                   </label>
                   <select
@@ -146,7 +146,7 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, yearOfStudy: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white transition-colors"
                   >
                     <option value="1st Year">1st Year (Fresher)</option>
                     <option value="2nd Year">2nd Year (Sophomore)</option>
@@ -156,7 +156,7 @@ export default function ApplyPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-2">
+                <label className="block text-xs font-mono text-zinc-400 mb-2">
                   Primary Domain of Interest *
                 </label>
                 <select
@@ -164,20 +164,20 @@ export default function ApplyPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, primaryDomain: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white transition-colors"
                 >
+                  <option value="AI Systems & LLMs">AI Systems, LLMs &amp; Agents</option>
                   <option value="Full Stack & Web">Full Stack &amp; Web Engineering</option>
-                  <option value="AI / ML & Agents">AI / Machine Learning &amp; Agents</option>
-                  <option value="Cloud & DevOps">Cloud Infrastructure &amp; DevOps</option>
-                  <option value="Game Dev & Spatial 3D">Spatial 3D &amp; Game Development</option>
-                  <option value="Mobile Engineering">Mobile Engineering (Flutter/Native)</option>
-                  <option value="UI/UX & Product Design">UI / UX &amp; Product Design</option>
+                  <option value="Cloud & MLOps">Cloud Infrastructure &amp; MLOps</option>
+                  <option value="Backend Architecture">Backend Architecture &amp; Distributed Systems</option>
+                  <option value="Robotics & Spatial 3D">Robotics, Spatial 3D &amp; IoT</option>
+                  <option value="UI/UX & Design Systems">UI / UX &amp; Design Systems</option>
                 </select>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     GitHub Profile Link
                   </label>
                   <input
@@ -187,12 +187,12 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, githubUrl: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-2">
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
                     Portfolio / LinkedIn / Project Demo
                   </label>
                   <input
@@ -202,13 +202,13 @@ export default function ApplyPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, portfolioUrl: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-2">
+                <label className="block text-xs font-mono text-zinc-400 mb-2">
                   What makes you want to join DEVS REC? (Proof of work, passion, or projects built) *
                 </label>
                 <textarea
@@ -219,14 +219,14 @@ export default function ApplyPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, whyJoin: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono font-bold text-sm transition-all shadow-[0_0_25px_rgba(52,211,153,0.3)] active:scale-95 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-mono font-bold text-sm transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
                 <span>{loading ? "Transmitting Application..." : "Submit Recruitment Application"}</span>
@@ -235,12 +235,12 @@ export default function ApplyPage() {
           </div>
         ) : (
           /* Submission Confirmation View */
-          <div className="text-center py-12 p-8 rounded-3xl border border-emerald-500/30 bg-zinc-950 shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-6 border border-emerald-500/40">
+          <div className="text-center py-12 p-8 rounded-3xl border border-white/20 bg-zinc-950 shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-white/10 text-white flex items-center justify-center mx-auto mb-6 border border-white/20">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white border border-white/20 text-xs font-mono mb-4">
               <span>APPLICATION LOGGED</span>
             </div>
 
@@ -248,22 +248,22 @@ export default function ApplyPage() {
               Application Received, {formData.fullName}!
             </h2>
 
-            <p className="text-sm text-zinc-300 max-w-md mx-auto mb-6 leading-relaxed">
+            <p className="text-sm text-zinc-400 max-w-md mx-auto mb-6 leading-relaxed">
               Your candidate profile has been recorded in the DEVS REC applicant stream. Keep an eye on your email for interview invitations and code challenge links.
             </p>
 
-            <div className="max-w-md mx-auto p-4 rounded-2xl bg-zinc-900/90 border border-white/10 font-mono text-left text-xs space-y-2 mb-8">
+            <div className="max-w-md mx-auto p-4 rounded-2xl bg-zinc-900 border border-white/10 font-mono text-left text-xs space-y-2 mb-8">
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-zinc-400">Tracking ID:</span>
-                <span className="text-emerald-400 font-bold">{appId}</span>
+                <span className="text-zinc-500">Tracking ID:</span>
+                <span className="text-white font-bold">{appId}</span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-zinc-400">Domain Preference:</span>
+                <span className="text-zinc-500">Domain Preference:</span>
                 <span className="text-white">{formData.primaryDomain}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Next Step:</span>
-                <span className="text-cyan-400">Domain Lead Evaluation</span>
+                <span className="text-zinc-500">Next Step:</span>
+                <span className="text-zinc-300">Domain Lead Evaluation</span>
               </div>
             </div>
 
@@ -276,7 +276,7 @@ export default function ApplyPage() {
                   rollNumber: "",
                   department: "CSE",
                   yearOfStudy: "2nd Year",
-                  primaryDomain: "Full Stack & Web",
+                  primaryDomain: "AI Systems & LLMs",
                   githubUrl: "",
                   portfolioUrl: "",
                   whyJoin: "",

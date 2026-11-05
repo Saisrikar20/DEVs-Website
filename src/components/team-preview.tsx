@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useCMSData } from "@/data/cms-store";
 import { ArrowRight, Sparkles, Users } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "./icons";
 
 export const TeamPreview = () => {
   const { data } = useCMSData();
@@ -16,14 +16,14 @@ export const TeamPreview = () => {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-zinc-300 mb-3">
-              <Users className="w-3.5 h-3.5 text-emerald-400" />
+              <Users className="w-3.5 h-3.5 text-zinc-300" />
               <span>LEADERSHIP &amp; ARCHITECTS</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
               The Builders Behind DEVS REC
             </h2>
-            <p className="mt-2 text-xs sm:text-sm text-zinc-300 max-w-lg">
-              Student founders, tech leads, and domain architects mentoring the next generation of engineers.
+            <p className="mt-2 text-xs sm:text-sm text-zinc-400 max-w-lg">
+              Student organizers, system architects, and domain directors mentoring the next generation of engineers.
             </p>
           </div>
 
@@ -40,10 +40,10 @@ export const TeamPreview = () => {
           {members.map((member) => (
             <div
               key={member.id}
-              className="flex flex-col justify-between h-full rounded-2xl border border-white/[0.08] bg-zinc-950/80 p-5 lift hover:border-white/20 transition-all shadow-xl group"
+              className="flex flex-col justify-between h-full rounded-2xl border border-white/[0.08] bg-zinc-950 p-5 lift hover:border-white/25 transition-all shadow-xl group"
             >
               <div>
-                {/* Avatar with fallback or image */}
+                {/* Avatar with authentic member image */}
                 <div className="w-full aspect-square rounded-xl overflow-hidden bg-zinc-900 border border-white/10 mb-4 relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -52,7 +52,7 @@ export const TeamPreview = () => {
                     className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                   />
                   <div className="absolute top-2.5 right-2.5">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/80 text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/85 text-white border border-white/20 backdrop-blur-md">
                       {member.domain}
                     </span>
                   </div>
@@ -64,7 +64,7 @@ export const TeamPreview = () => {
                 <p className="text-xs font-mono text-zinc-400 mb-2.5">
                   {member.role}
                 </p>
-                <p className="text-xs text-zinc-300 line-clamp-2 mb-4 leading-relaxed">
+                <p className="text-xs text-zinc-400 line-clamp-2 mb-4 leading-relaxed">
                   {member.bio}
                 </p>
               </div>
@@ -80,7 +80,7 @@ export const TeamPreview = () => {
                       href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.1] text-zinc-400 hover:text-white transition-colors"
+                      className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.12] text-zinc-400 hover:text-white transition-colors"
                       title="GitHub"
                     >
                       <GithubIcon className="w-3.5 h-3.5" />
@@ -91,10 +91,21 @@ export const TeamPreview = () => {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.1] text-zinc-400 hover:text-white transition-colors"
+                      className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.12] text-zinc-400 hover:text-white transition-colors"
                       title="LinkedIn"
                     >
                       <LinkedinIcon className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  {member.instagram && (
+                    <a
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.12] text-zinc-400 hover:text-white transition-colors"
+                      title="Instagram"
+                    >
+                      <InstagramIcon className="w-3.5 h-3.5" />
                     </a>
                   )}
                 </div>

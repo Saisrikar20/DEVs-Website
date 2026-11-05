@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import AnnouncementBar from "@/components/announcement-bar";
+import PreloaderProvider from "@/components/preloader-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -21,6 +22,14 @@ export const metadata: Metadata = {
   title: "DEVS REC · Premier Developer Community of Rajalakshmi Engineering College",
   description:
     "The flagship technical society of REC. Pioneering full stack architectures, AI/ML models, spatial 3D experiences, national hackathons, and peer-to-peer engineering.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/devs-favicon.png", sizes: "256x256", type: "image/png" },
+      { url: "/devs-favicon-64.png", sizes: "64x64", type: "image/png" },
+    ],
+    apple: "/devs-favicon.png",
+  },
   keywords: [
     "DEVS REC",
     "Rajalakshmi Engineering College",
@@ -51,11 +60,14 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} font-sans bg-black text-zinc-100 antialiased selection:bg-white/20 selection:text-white min-h-screen flex flex-col`}
       >
-        <AnnouncementBar />
-        <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
-        <Footer />
+        <PreloaderProvider>
+          <AnnouncementBar />
+          <Navbar />
+          <main className="flex-1 pt-16">{children}</main>
+          <Footer />
+        </PreloaderProvider>
       </body>
     </html>
   );
 }
+

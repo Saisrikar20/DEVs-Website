@@ -18,7 +18,7 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
   speed = 35,
   characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*",
   className = "",
-  encryptedClassName = "text-emerald-400 font-mono",
+  encryptedClassName = "text-white font-mono",
   animateOn = "hover",
   parentClassName = "",
 }) => {
@@ -77,3 +77,4 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
 };
 
 export default DecryptedText;
+

@@ -14,9 +14,9 @@ interface SquaresProps {
 export const Squares: React.FC<SquaresProps> = ({
   direction = "right",
   speed = 0.5,
-  borderColor = "rgba(255, 255, 255, 0.05)",
+  borderColor = "rgba(255, 255, 255, 0.04)",
   squareSize = 44,
-  hoverFillColor = "rgba(52, 211, 153, 0.08)",
+  hoverFillColor = "rgba(255, 255, 255, 0.1)",
   className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -112,3 +112,4 @@ export const Squares: React.FC<SquaresProps> = ({
 };
 
 export default Squares;
+

@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { useCMSData, CMSData, defaultCMSData } from "@/data/cms-store";
+import { useCMSData, CMSData } from "@/data/cms-store";
 import { ClubEvent, ClubProject, TeamMember } from "@/data/club-data";
-import DecryptedText from "@/components/reactbits/DecryptedText";
-import ShinyText from "@/components/reactbits/ShinyText";
 import {
   ShieldCheck,
   Save,
@@ -105,14 +103,14 @@ export default function AdminCMSPage() {
     <div className="min-h-screen py-10 sm:py-16 bg-black text-zinc-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Jargon Educational Alert for the user */}
-        <div className="mb-8 p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 text-xs font-mono text-zinc-300 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="mb-8 p-5 rounded-2xl border border-white/20 bg-zinc-950 text-xs font-mono text-zinc-300 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
-            <HelpCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <HelpCircle className="w-5 h-5 text-zinc-300 shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-white block mb-0.5">
                 What is this page? (The CMS Explained)
               </span>
-              <span>
+              <span className="text-zinc-400">
                 This is your <strong>CMS (Content Management System)</strong>. Non-technical club leads can edit announcements, tweak live stats, add upcoming workshops, and update member bios right here. Every change updates the website immediately without touching code or Git!
               </span>
             </div>
@@ -120,7 +118,7 @@ export default function AdminCMSPage() {
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleSave}
-              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-lg active:scale-95"
+              className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-lg active:scale-95"
             >
               <Save className="w-4 h-4" />
               <span>Publish Changes</span>
@@ -137,7 +135,7 @@ export default function AdminCMSPage() {
 
         {/* Save confirmation toast */}
         {saveNotification && (
-          <div className="mb-6 p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-xs flex items-center gap-2 animate-bounce">
+          <div className="mb-6 p-3 rounded-xl bg-white/10 border border-white/25 text-white font-mono text-xs flex items-center gap-2 animate-bounce">
             <ShieldCheck className="w-4 h-4" />
             <span>Success: CMS content updated live across all website pages!</span>
           </div>
@@ -147,7 +145,7 @@ export default function AdminCMSPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-zinc-300 mb-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" />
               <span>CONTENT STUDIO &amp; ADMIN PANEL</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-white">
@@ -162,7 +160,7 @@ export default function AdminCMSPage() {
             onClick={() => setActiveTab("general")}
             className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
               activeTab === "general"
-                ? "bg-white/[0.12] text-white font-bold border border-white/20"
+                ? "bg-white text-black font-bold"
                 : "text-zinc-400 hover:text-white"
             }`}
           >
@@ -173,7 +171,7 @@ export default function AdminCMSPage() {
             onClick={() => setActiveTab("events")}
             className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
               activeTab === "events"
-                ? "bg-white/[0.12] text-white font-bold border border-white/20"
+                ? "bg-white text-black font-bold"
                 : "text-zinc-400 hover:text-white"
             }`}
           >
@@ -184,7 +182,7 @@ export default function AdminCMSPage() {
             onClick={() => setActiveTab("projects")}
             className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
               activeTab === "projects"
-                ? "bg-white/[0.12] text-white font-bold border border-white/20"
+                ? "bg-white text-black font-bold"
                 : "text-zinc-400 hover:text-white"
             }`}
           >
@@ -196,9 +194,9 @@ export default function AdminCMSPage() {
         {/* TAB 1: GENERAL & STATS */}
         {activeTab === "general" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950/80 space-y-4">
+            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4">
               <h2 className="text-base font-bold text-white flex items-center gap-2 font-mono">
-                <Bell className="w-4 h-4 text-emerald-400" />
+                <Bell className="w-4 h-4 text-zinc-300" />
                 <span>Top Banner Announcement</span>
               </h2>
               <p className="text-xs text-zinc-400">
@@ -208,13 +206,13 @@ export default function AdminCMSPage() {
                 type="text"
                 value={announcement}
                 onChange={(e) => setAnnouncement(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-500 font-mono transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white font-mono transition-colors"
               />
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950/80 space-y-4">
+            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4">
               <h2 className="text-base font-bold text-white flex items-center gap-2 font-mono">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <Sparkles className="w-4 h-4 text-zinc-300" />
                 <span>Live Proof-of-Work Counters</span>
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -228,7 +226,7 @@ export default function AdminCMSPage() {
                     onChange={(e) =>
                       setStats({ ...stats, members: Number(e.target.value) })
                     }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
                   />
                 </div>
                 <div>
@@ -241,7 +239,7 @@ export default function AdminCMSPage() {
                     onChange={(e) =>
                       setStats({ ...stats, hackathons: Number(e.target.value) })
                     }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
                   />
                 </div>
                 <div>
@@ -254,7 +252,7 @@ export default function AdminCMSPage() {
                     onChange={(e) =>
                       setStats({ ...stats, platforms: Number(e.target.value) })
                     }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
                   />
                 </div>
                 <div>
@@ -267,7 +265,7 @@ export default function AdminCMSPage() {
                     onChange={(e) =>
                       setStats({ ...stats, prizeMoney: Number(e.target.value) })
                     }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
                   />
                 </div>
               </div>
@@ -284,7 +282,7 @@ export default function AdminCMSPage() {
               </span>
               <button
                 onClick={handleAddEvent}
-                className="px-3.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500 hover:text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl bg-white/[0.08] text-white border border-white/20 hover:bg-white hover:text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Event</span>
@@ -295,10 +293,10 @@ export default function AdminCMSPage() {
               {events.map((evt, idx) => (
                 <div
                   key={evt.id}
-                  className="p-5 rounded-2xl border border-white/10 bg-zinc-950/80 space-y-4"
+                  className="p-5 rounded-2xl border border-white/10 bg-zinc-950 space-y-4"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono text-emerald-400 font-bold">
+                    <span className="text-xs font-mono text-white font-bold">
                       Event #{idx + 1}
                     </span>
                     <button
@@ -425,7 +423,7 @@ export default function AdminCMSPage() {
               </span>
               <button
                 onClick={handleAddProject}
-                className="px-3.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500 hover:text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl bg-white/[0.08] text-white border border-white/20 hover:bg-white hover:text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Project</span>
@@ -436,10 +434,10 @@ export default function AdminCMSPage() {
               {projects.map((proj, idx) => (
                 <div
                   key={proj.id}
-                  className="p-5 rounded-2xl border border-white/10 bg-zinc-950/80 space-y-4"
+                  className="p-5 rounded-2xl border border-white/10 bg-zinc-950 space-y-4"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono text-cyan-400 font-bold">
+                    <span className="text-xs font-mono text-white font-bold">
                       Project #{idx + 1}
                     </span>
                     <button
@@ -528,7 +526,7 @@ export default function AdminCMSPage() {
           </span>
           <button
             onClick={handleSave}
-            className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono font-bold text-xs flex items-center gap-2 transition-all cursor-pointer shadow-[0_0_20px_rgba(52,211,153,0.3)] active:scale-95"
+            className="px-6 py-3 rounded-xl bg-white hover:bg-zinc-200 text-black font-mono font-bold text-xs flex items-center gap-2 transition-all cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95"
           >
             <Save className="w-4 h-4" />
             <span>Publish Changes</span>

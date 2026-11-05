@@ -46,13 +46,13 @@ export const StatsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-zinc-300 mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
             <span>PROOF OF WORK &amp; IMPACT</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Engineering Numbers That Speak
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-zinc-300">
+          <p className="mt-2 text-xs sm:text-sm text-zinc-400">
             Real metrics driven by REC student builders, mentors, and innovators.
           </p>
         </div>
@@ -63,13 +63,13 @@ export const StatsSection = () => {
             return (
               <div
                 key={idx}
-                className="relative rounded-2xl border border-white/[0.08] bg-zinc-950/70 p-6 lift hover:border-white/20 transition-all group overflow-hidden"
+                className="relative rounded-2xl border border-white/[0.08] bg-zinc-950 p-6 lift hover:border-white/25 transition-all group overflow-hidden"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-300 group-hover:text-emerald-400 transition-colors">
+                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-300 group-hover:text-white transition-colors">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="text-[11px] font-mono text-zinc-300 font-semibold">
+                  <span className="text-[11px] font-mono text-zinc-500 font-semibold">
                     0{idx + 1}
                   </span>
                 </div>
@@ -80,19 +80,19 @@ export const StatsSection = () => {
                     prefix={item.prefix}
                     suffix={item.suffix}
                     duration={2.5}
-                    className="text-white group-hover:text-emerald-300 transition-colors"
+                    className="text-white"
                   />
                 </div>
 
                 <h3 className="text-sm font-semibold text-zinc-200 mb-1">
                   {item.label}
                 </h3>
-                <p className="text-xs text-zinc-300">
+                <p className="text-xs text-zinc-400">
                   {item.description}
                 </p>
 
-                {/* Subtle bottom accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Subtle bottom accent line (monochrome white) */}
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             );
           })}
