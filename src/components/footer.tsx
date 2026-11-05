@@ -93,6 +93,15 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-2 text-xs font-mono text-zinc-400">
               <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-white transition-colors flex items-center justify-between group"
+                >
+                  <span className="text-zinc-300 group-hover:text-white">Engineering Blogs</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white" />
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://learn.devsrec.com"
                   target="_blank"

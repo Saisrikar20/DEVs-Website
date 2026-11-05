@@ -6,13 +6,15 @@ import {
   initialProjects,
   initialTeamMembers,
   initialClubStats,
+  initialBlogPosts,
   ClubEvent,
   ClubProject,
   TeamMember,
   ClubStats,
+  ClubBlogPost,
 } from "./club-data";
 
-const CMS_STORAGE_KEY = "devs_rec_cms_data_v2";
+const CMS_STORAGE_KEY = "devs_rec_cms_data_v3";
 
 export interface CMSData {
   announcement: string;
@@ -20,6 +22,7 @@ export interface CMSData {
   events: ClubEvent[];
   projects: ClubProject[];
   team: TeamMember[];
+  blogs: ClubBlogPost[];
 }
 
 export const defaultCMSData: CMSData = {
@@ -28,6 +31,7 @@ export const defaultCMSData: CMSData = {
   events: initialEvents,
   projects: initialProjects,
   team: initialTeamMembers,
+  blogs: initialBlogPosts,
 };
 
 export function getStoredCMSData(): CMSData {
@@ -35,7 +39,12 @@ export function getStoredCMSData(): CMSData {
   try {
     const raw = localStorage.getItem(CMS_STORAGE_KEY);
     if (!raw) return defaultCMSData;
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    return {
+      ...defaultCMSData,
+      ...parsed,
+      blogs: parsed.blogs || defaultCMSData.blogs,
+    };
   } catch (e) {
     console.error("Failed to parse CMS data from localStorage", e);
     return defaultCMSData;
@@ -85,4 +94,3 @@ export function useCMSData() {
 
   return { data, isLoaded, updateData, resetData };
 }
-

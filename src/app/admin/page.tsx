@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useCMSData, CMSData } from "@/data/cms-store";
-import { ClubEvent, ClubProject, TeamMember } from "@/data/club-data";
+import { ClubEvent, ClubProject, TeamMember, ClubBlogPost } from "@/data/club-data";
 import {
   ShieldCheck,
   Save,
@@ -13,14 +13,14 @@ import {
   Code2,
   Users,
   Bell,
+  BookOpen,
   HelpCircle,
   Sparkles,
-  ExternalLink,
 } from "lucide-react";
 
 export default function AdminCMSPage() {
   const { data, updateData, resetData } = useCMSData();
-  const [activeTab, setActiveTab] = useState<"general" | "events" | "projects" | "team">("general");
+  const [activeTab, setActiveTab] = useState<"general" | "events" | "projects" | "blogs">("blogs");
   const [saveNotification, setSaveNotification] = useState(false);
 
   // Local state for editing
@@ -29,6 +29,7 @@ export default function AdminCMSPage() {
   const [events, setEvents] = useState<ClubEvent[]>(data.events);
   const [projects, setProjects] = useState<ClubProject[]>(data.projects);
   const [team, setTeam] = useState<TeamMember[]>(data.team);
+  const [blogs, setBlogs] = useState<ClubBlogPost[]>(data.blogs || []);
 
   // Sync when data loads
   React.useEffect(() => {
@@ -37,6 +38,7 @@ export default function AdminCMSPage() {
     setEvents(data.events);
     setProjects(data.projects);
     setTeam(data.team);
+    setBlogs(data.blogs || []);
   }, [data]);
 
   const handleSave = () => {
@@ -46,6 +48,7 @@ export default function AdminCMSPage() {
       events,
       projects,
       team,
+      blogs,
     };
     updateData(updated);
     setSaveNotification(true);
@@ -56,6 +59,29 @@ export default function AdminCMSPage() {
     if (confirm("Are you sure you want to restore the default club content?")) {
       resetData();
     }
+  };
+
+  // Blog handlers
+  const handleAddBlog = () => {
+    const newBlog: ClubBlogPost = {
+      id: `blog-${Date.now()}`,
+      title: "New Technical Post",
+      slug: `new-post-${Date.now()}`,
+      excerpt: "A brief summary of the insights and discoveries in this post.",
+      content: `### Introduction\nWrite your thoughts here. You can use markdown headers, lists, and code blocks.\n\n### Key Takeaways\n- Focus on proof of work\n- Collaborate and ship often`,
+      author: "DEVS Core Writer",
+      authorRole: "Technical Contributor",
+      authorAvatar: "/sai-srikar.jpg",
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      readTime: "4 min read",
+      tags: ["Tech", "Engineering"],
+      featured: false,
+    };
+    setBlogs([newBlog, ...blogs]);
+  };
+
+  const handleDeleteBlog = (id: string) => {
+    setBlogs(blogs.filter((b) => b.id !== id));
   };
 
   // Event handlers
@@ -102,16 +128,16 @@ export default function AdminCMSPage() {
   return (
     <div className="min-h-screen py-10 sm:py-16 bg-black text-zinc-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Jargon Educational Alert for the user */}
+        {/* Jargon Educational Alert */}
         <div className="mb-8 p-5 rounded-2xl border border-white/20 bg-zinc-950 text-xs font-mono text-zinc-300 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
             <HelpCircle className="w-5 h-5 text-zinc-300 shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-white block mb-0.5">
-                What is this page? (The CMS Explained)
+                No-Code CMS Content Studio
               </span>
               <span className="text-zinc-400">
-                This is your <strong>CMS (Content Management System)</strong>. Non-technical club leads can edit announcements, tweak live stats, add upcoming workshops, and update member bios right here. Every change updates the website immediately without touching code or Git!
+                You can write and publish <strong>Blogs</strong>, add <strong>Events</strong>, update <strong>Stats</strong>, and manage <strong>Projects</strong> here. Changes appear immediately on the website without editing code or redeploying!
               </span>
             </div>
           </div>
@@ -157,15 +183,15 @@ export default function AdminCMSPage() {
         {/* Navigation Tabs */}
         <div className="flex items-center gap-2 p-1 rounded-2xl bg-zinc-950 border border-white/10 mb-8 overflow-x-auto">
           <button
-            onClick={() => setActiveTab("general")}
+            onClick={() => setActiveTab("blogs")}
             className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
-              activeTab === "general"
+              activeTab === "blogs"
                 ? "bg-white text-black font-bold"
                 : "text-zinc-400 hover:text-white"
             }`}
           >
-            <Bell className="w-3.5 h-3.5" />
-            <span>Announcement &amp; Stats</span>
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Articles &amp; Blogs ({blogs.length})</span>
           </button>
           <button
             onClick={() => setActiveTab("events")}
@@ -189,91 +215,180 @@ export default function AdminCMSPage() {
             <Code2 className="w-3.5 h-3.5" />
             <span>Projects ({projects.length})</span>
           </button>
+          <button
+            onClick={() => setActiveTab("general")}
+            className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+              activeTab === "general"
+                ? "bg-white text-black font-bold"
+                : "text-zinc-400 hover:text-white"
+            }`}
+          >
+            <Bell className="w-3.5 h-3.5" />
+            <span>Announcement &amp; Stats</span>
+          </button>
         </div>
 
-        {/* TAB 1: GENERAL & STATS */}
-        {activeTab === "general" && (
+        {/* TAB: BLOGS (Requested by user) */}
+        {activeTab === "blogs" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4">
-              <h2 className="text-base font-bold text-white flex items-center gap-2 font-mono">
-                <Bell className="w-4 h-4 text-zinc-300" />
-                <span>Top Banner Announcement</span>
-              </h2>
-              <p className="text-xs text-zinc-400">
-                This notice floats above the website navigation on every page.
-              </p>
-              <input
-                type="text"
-                value={announcement}
-                onChange={(e) => setAnnouncement(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white font-mono transition-colors"
-              />
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono text-zinc-400">
+                Publish tech articles, engineering tutorials, and student thought leadership.
+              </span>
+              <button
+                onClick={handleAddBlog}
+                className="px-3.5 py-1.5 rounded-xl bg-white/[0.08] text-white border border-white/20 hover:bg-white hover:text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Write New Blog Post</span>
+              </button>
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4">
-              <h2 className="text-base font-bold text-white flex items-center gap-2 font-mono">
-                <Sparkles className="w-4 h-4 text-zinc-300" />
-                <span>Live Proof-of-Work Counters</span>
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Students Impacted
-                  </label>
-                  <input
-                    type="number"
-                    value={stats.members}
-                    onChange={(e) =>
-                      setStats({ ...stats, members: Number(e.target.value) })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
-                  />
+            <div className="space-y-6">
+              {blogs.map((blog, idx) => (
+                <div
+                  key={blog.id}
+                  className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono text-white font-bold">
+                        Article #{idx + 1}
+                      </span>
+                      {blog.featured && (
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20 font-bold">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => handleDeleteBlog(blog.id)}
+                      className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+                      title="Delete blog post"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                        Article Title
+                      </label>
+                      <input
+                        type="text"
+                        value={blog.title}
+                        onChange={(e) => {
+                          const copy = [...blogs];
+                          copy[idx].title = e.target.value;
+                          setBlogs(copy);
+                        }}
+                        className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                        URL Slug (e.g. why-ai-augments-humans)
+                      </label>
+                      <input
+                        type="text"
+                        value={blog.slug}
+                        onChange={(e) => {
+                          const copy = [...blogs];
+                          copy[idx].slug = e.target.value.toLowerCase().replace(/\s+/g, "-");
+                          setBlogs(copy);
+                        }}
+                        className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                        Author Name
+                      </label>
+                      <input
+                        type="text"
+                        value={blog.author}
+                        onChange={(e) => {
+                          const copy = [...blogs];
+                          copy[idx].author = e.target.value;
+                          setBlogs(copy);
+                        }}
+                        className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                        Author Role / Domain
+                      </label>
+                      <input
+                        type="text"
+                        value={blog.authorRole}
+                        onChange={(e) => {
+                          const copy = [...blogs];
+                          copy[idx].authorRole = e.target.value;
+                          setBlogs(copy);
+                        }}
+                        className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                        Estimated Read Time
+                      </label>
+                      <input
+                        type="text"
+                        value={blog.readTime}
+                        onChange={(e) => {
+                          const copy = [...blogs];
+                          copy[idx].readTime = e.target.value;
+                          setBlogs(copy);
+                        }}
+                        className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                      Short Excerpt / Teaser
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={blog.excerpt}
+                      onChange={(e) => {
+                        const copy = [...blogs];
+                        copy[idx].excerpt = e.target.value;
+                        setBlogs(copy);
+                      }}
+                      className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">
+                      Full Article Content (Markdown supported)
+                    </label>
+                    <textarea
+                      rows={6}
+                      value={blog.content}
+                      onChange={(e) => {
+                        const copy = [...blogs];
+                        copy[idx].content = e.target.value;
+                        setBlogs(copy);
+                      }}
+                      className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white font-mono"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Hackathons Hosted
-                  </label>
-                  <input
-                    type="number"
-                    value={stats.hackathons}
-                    onChange={(e) =>
-                      setStats({ ...stats, hackathons: Number(e.target.value) })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Active Platforms
-                  </label>
-                  <input
-                    type="number"
-                    value={stats.platforms}
-                    onChange={(e) =>
-                      setStats({ ...stats, platforms: Number(e.target.value) })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Prize Money ($)
-                  </label>
-                  <input
-                    type="number"
-                    value={stats.prizeMoney}
-                    onChange={(e) =>
-                      setStats({ ...stats, prizeMoney: Number(e.target.value) })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         )}
 
-        {/* TAB 2: EVENTS */}
+        {/* TAB: EVENTS */}
         {activeTab === "events" && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -414,7 +529,7 @@ export default function AdminCMSPage() {
           </div>
         )}
 
-        {/* TAB 3: PROJECTS */}
+        {/* TAB: PROJECTS */}
         {activeTab === "projects" && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -519,10 +634,92 @@ export default function AdminCMSPage() {
           </div>
         )}
 
+        {/* TAB: GENERAL & STATS */}
+        {activeTab === "general" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4">
+              <h2 className="text-base font-bold text-white flex items-center gap-2 font-mono">
+                <Bell className="w-4 h-4 text-zinc-300" />
+                <span>Top Banner Announcement</span>
+              </h2>
+              <p className="text-xs text-zinc-400">
+                This notice floats above the website navigation on every page.
+              </p>
+              <input
+                type="text"
+                value={announcement}
+                onChange={(e) => setAnnouncement(e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white focus:outline-none focus:border-white font-mono transition-colors"
+              />
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/10 bg-zinc-950 space-y-4">
+              <h2 className="text-base font-bold text-white flex items-center gap-2 font-mono">
+                <Sparkles className="w-4 h-4 text-zinc-300" />
+                <span>Live Proof-of-Work Counters</span>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
+                    Students Impacted
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.members}
+                    onChange={(e) =>
+                      setStats({ ...stats, members: Number(e.target.value) })
+                    }
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
+                    Hackathons Hosted
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.hackathons}
+                    onChange={(e) =>
+                      setStats({ ...stats, hackathons: Number(e.target.value) })
+                    }
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
+                    Active Platforms
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.platforms}
+                    onChange={(e) =>
+                      setStats({ ...stats, platforms: Number(e.target.value) })
+                    }
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
+                    Prize Money ($)
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.prizeMoney}
+                    onChange={(e) =>
+                      setStats({ ...stats, prizeMoney: Number(e.target.value) })
+                    }
+                    className="w-full px-3.5 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Bottom Save Action */}
         <div className="mt-10 pt-6 border-t border-white/10 flex items-center justify-between">
           <span className="text-xs font-mono text-zinc-400">
-            Press &quot;Publish Changes&quot; to push all modifications to the live site.
+            Press &quot;Publish Changes&quot; to push all modifications live to the website.
           </span>
           <button
             onClick={handleSave}

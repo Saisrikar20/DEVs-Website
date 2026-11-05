@@ -3,9 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Terminal, Calendar, Code2, Users, Sparkles, Menu, X, ArrowUpRight, ShieldCheck } from "lucide-react";
-import ShinyText from "./reactbits/ShinyText";
-import DecryptedText from "./reactbits/DecryptedText";
+import { Terminal, Calendar, Code2, Users, BookOpen, Menu, X, ShieldCheck } from "lucide-react";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +22,7 @@ export const Navbar = () => {
     { name: "Explore", href: "/#domains", icon: Terminal },
     { name: "Events", href: "/events", icon: Calendar },
     { name: "Projects", href: "/projects", icon: Code2 },
-    { name: "P2P Curriculum", href: "https://learn.devsrec.com", external: true, icon: Sparkles },
+    { name: "Blog", href: "/blog", icon: BookOpen },
     { name: "Team", href: "/team", icon: Users },
   ];
 
@@ -38,45 +36,22 @@ export const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo with official DEVS logo */}
-          <Link href="/" className="flex items-center gap-3.5 group">
+          {/* Clean Official Logo only */}
+          <Link href="/" className="flex items-center group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/devs-logo.png"
-              alt="DEVS Logo"
-              className="h-8 w-auto object-contain transition-all duration-300 group-hover:scale-105 drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
+              alt="DEVS"
+              className="h-8 sm:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(255,255,255,0.25)]"
             />
-            <div className="flex flex-col border-l border-white/10 pl-3">
-              <span className="font-bold text-sm tracking-tight text-white font-sans flex items-center gap-2">
-                <span>DEVS REC</span>
-                <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/[0.08] text-white border border-white/15 font-semibold">
-                  OFFICIAL
-                </span>
-              </span>
-              <span className="text-[10px] font-mono text-zinc-400 tracking-wider">
-                RAJALAKSHMI ENGG COLLEGE
-              </span>
-            </div>
           </Link>
 
-          {/* Desktop Nav Links (Monochrome Swiss Style) */}
+          {/* Desktop Nav Links (Clean Monochrome Swiss Style) */}
           <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-zinc-950 border border-white/[0.1] backdrop-blur-md px-3">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
-              return link.external ? (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 hover:text-white hover:bg-white/[0.08] transition-all"
-                >
-                  <Icon className="w-3.5 h-3.5 text-zinc-300" />
-                  <span>{link.name}</span>
-                  <ArrowUpRight className="w-3 h-3 text-zinc-500" />
-                </a>
-              ) : (
+              return (
                 <Link
                   key={link.name}
                   href={link.href}
@@ -93,7 +68,7 @@ export const Navbar = () => {
             })}
           </nav>
 
-          {/* CTA & Admin CMS Button (Monochrome Inversion) */}
+          {/* Right Action Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/admin"
@@ -128,22 +103,7 @@ export const Navbar = () => {
         <div className="md:hidden border-b border-white/10 bg-black/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2 mt-2">
           {navLinks.map((link) => {
             const Icon = link.icon;
-            return link.external ? (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl text-sm font-mono text-zinc-300 hover:text-white hover:bg-white/[0.06]"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Icon className="w-4 h-4 text-zinc-300" />
-                  <span>{link.name}</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
-              </a>
-            ) : (
+            return (
               <Link
                 key={link.name}
                 href={link.href}

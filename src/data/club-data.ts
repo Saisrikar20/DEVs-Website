@@ -49,6 +49,21 @@ export interface TeamMember {
   isAlumni?: boolean;
 }
 
+export interface ClubBlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  authorRole: string;
+  authorAvatar?: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+  featured?: boolean;
+}
+
 export interface ClubStats {
   members: number;
   hackathons: number;
@@ -206,6 +221,82 @@ export const initialEvents: ClubEvent[] = [
     seatsTotal: 120,
     seatsFilled: 95,
     slug: "be-a-ui-developer",
+    featured: false,
+  },
+];
+
+export const initialBlogPosts: ClubBlogPost[] = [
+  {
+    id: "blog-1",
+    title: "Why AI is an Engine of Human Augmentation, Not Replacement",
+    slug: "why-ai-is-augmenting-humans",
+    excerpt: "Artificial Intelligence is frequently mischaracterized as machines replacing human creators. In truth, AI operates as cognitive leverage — amplifying what ambitious student developers can build.",
+    content: `Artificial Intelligence is sometimes incorrectly framed as machines replacing humans. It's not about machines replacing humans, but machines augmenting human potential and engineering ambition.
+
+### The Cognitive Leverage Hypothesis
+When mechanical power replaced muscle in the Industrial Revolution, physical construction transformed. We didn't build less; we built skyscrapers, bridges, and interstate transport networks that were impossible with human hands alone.
+
+Today, LLMs, neural transformers, and autonomous agent loops act as **cognitive horsepower**. A single college developer at DEVS REC can now architect a full-stack platform, containerize it, run automated threat audits, and serve fine-tuned models in days rather than months.
+
+### The New Role of the Student Engineer
+The paradigm shifts from syntax memorization to:
+1. **Architectural Judgment**: Knowing how to structure microservices, rate-limit gateways, and ensure deterministic outputs.
+2. **Context Window Orchestration**: Structuring Retrieval-Augmented Generation (RAG) graphs and vector memory.
+3. **Problem Space Exploration**: Venturing into uncharted problems rather than rehashing boilerplate CRUD applications.
+
+At DEVS REC, our mission is to ensure every student masters this leverage. We don't fear machine intelligence; we build with it.`,
+    author: "Sai Srikar B",
+    authorRole: "Lead Organizer & AI Systems Architect",
+    authorAvatar: "/sai-srikar.jpg",
+    date: "April 18, 2025",
+    readTime: "4 min read",
+    tags: ["Artificial Intelligence", "Engineering", "Opinion"],
+    featured: true,
+  },
+  {
+    id: "blog-2",
+    title: "The Anatomy of a Production-Ready Next.js 15 Architecture",
+    slug: "anatomy-of-nextjs-15-architecture",
+    excerpt: "A deep dive into React 19 Server Components, zero-layout-shift font pipelines, Tailwind CSS v4, and edge caching for sub-second web performance.",
+    content: `Building a flagship web platform in 2025 requires rethinking data waterfalls, client hydration overhead, and bundle sizes.
+
+### Why React Server Components Matter
+By shifting non-interactive rendering to the server, we send zero JavaScript bundle overhead for static marketing sections, footer trees, and metadata blocks. Only dynamic islands (like our canvas particles and interactive modals) hydrate on the client.
+
+### Core Architecture Pillars:
+- **Zero CLS Typography**: Next.js Google font injection with zero layout shift.
+- **Tailwind CSS v4 Engine**: Lightning-fast compilation with CSS variables and minimal runtime overhead.
+- **Micro-Interactions via React Bits**: High-impact canvas animations without bloating global DOM nodes.
+
+When paired with a no-code CMS architecture, non-technical team members can publish real-time updates while developers preserve clean, type-safe code.`,
+    author: "ASVAND K",
+    authorRole: "Frontend Engineer & Mentor",
+    authorAvatar: "/asvand.jpg",
+    date: "April 10, 2025",
+    readTime: "5 min read",
+    tags: ["Next.js", "Web Dev", "Performance"],
+    featured: false,
+  },
+  {
+    id: "blog-3",
+    title: "From 0 to Pod: How We Run Student Project Incubations",
+    slug: "how-we-run-student-project-pods",
+    excerpt: "How DEVS REC groups students across AI, Web, Systems, and Design into agile pods that ship real campus software.",
+    content: `Most college clubs stop at conducting workshops. At DEVS REC, a workshop is merely day zero. The true engineering begins in **Project Pods**.
+
+### The Pod Lifecycle
+1. **The Brief**: A real campus problem (e.g., campus navigation, club communication, hackathon pass management).
+2. **Cross-Domain Pairing**: One Lead Architect, two Web/Backend developers, one AI/Data analyst, and one UI/UX designer.
+3. **4-Week Sprint**: Weekly standups, GitHub review culture, and proof-of-work pull requests.
+4. **Campus Launch**: Releasing platforms like *REC Virtual Experience* to thousands of active campus users.
+
+If you want to build software that real humans use, submit your recruitment application and join a pod.`,
+    author: "Chandhru L",
+    authorRole: "Head of Operations",
+    authorAvatar: "/chandhru-l.jpg",
+    date: "March 29, 2025",
+    readTime: "3 min read",
+    tags: ["Culture", "Mentorship", "Community"],
     featured: false,
   },
 ];
