@@ -17,3 +17,4 @@ export const PreloaderProvider = ({ children }: { children: React.ReactNode }) =
 };
 
 export default PreloaderProvider;
+

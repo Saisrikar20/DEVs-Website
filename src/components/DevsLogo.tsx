@@ -41,3 +41,4 @@ export const DevsLogo: React.FC<DevsLogoProps> = ({
 };
 
 export default DevsLogo;
+

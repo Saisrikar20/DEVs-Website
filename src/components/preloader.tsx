@@ -102,3 +102,4 @@ export const Preloader: React.FC<PreloaderProps> = ({
 };
 
 export default Preloader;
+
